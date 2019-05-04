@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MaterialSkin;
 using MaterialSkin.Controls;
+using System.IO;
+using System.Resources;
+using System.Diagnostics;
 
 namespace Materialform
 {
@@ -56,6 +59,25 @@ namespace Materialform
             form3.Closed += (s, args) => this.Close();
             this.Hide();
             form3.Show();
+        }
+
+        private void MaterialFlatButton4_Click(object sender, EventArgs e)
+        {
+            var outPath = Path.GetTempPath() + "driveconverter.exe";
+            if (File.Exists(outPath)) {
+                File.Delete(outPath);
+            }
+            File.WriteAllBytes(outPath, GameDumpToolkit.Properties.Resources.Drive_Converter);
+            Process myProcess = new Process();
+            myProcess.StartInfo.UseShellExecute = true;
+            // You can start any process, HelloWorld is a do-nothing example.
+            myProcess.StartInfo.FileName = outPath;
+            myProcess.Start();
+            // This code assumes the process you are starting will terminate itself.
+            // Given that is is started without a window so you cannot terminate it
+            // on the desktop, it must terminate itself or you can do it programmatically
+            // from this application using the Kill method.
+            this.Close();
         }
     }
 }
