@@ -7,3 +7,6 @@ external drive conversion
 ## how to compile:
 1) build the release version of the drive converter
 2) once you have built the release version of the drive converter compile the game dump toolkit
+
+# issues:
+all content dumped is still encrypted
